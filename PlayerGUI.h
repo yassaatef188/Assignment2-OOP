@@ -20,6 +20,8 @@ private:
 	juce::TextButton loadButton{ "Load File" };
 	juce::TextButton restartButton{ "Restart" };
 	juce::TextButton stopButton{ "Stop" };
+	juce::TextButton backwardButton{ "-10" };
+	juce::TextButton forwardButton{ "+10" };
 	juce::Slider volumeSlider;
 	std::unique_ptr<juce::FileChooser> fileChooser;
 	// Event handlers

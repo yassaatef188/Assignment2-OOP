@@ -3,7 +3,7 @@
 PlayerGUI::PlayerGUI()
 {
     // Add buttons
-    for (auto* btn : { &loadButton, &restartButton , &stopButton})
+    for (auto* btn : { &loadButton, &restartButton , &stopButton, backwardButton, forwardButton})
     {
         btn->addListener(this);
         addAndMakeVisible(btn);
@@ -22,6 +22,8 @@ void PlayerGUI::resized()
     loadButton.setBounds(20, y, 100, 40);
     restartButton.setBounds(140, y, 80, 40);
     stopButton.setBounds(240, y, 80, 40);
+    backwardButton.setBounds(340, y, 80, 40);
+    forwardButton.setBounds(440, y, 80, 40);
     /*prevButton.setBounds(340, y, 80, 40);
     nextButton.setBounds(440, y, 80, 40);*/
 
@@ -86,6 +88,22 @@ void PlayerGUI::buttonClicked(juce::Button* button)
     {
         playerAudio.stop();
         playerAudio.setPosition(0.0);
+    }
+
+    if (button == &backwardButton)
+    {
+        if (playerAudio.getPosition() - 10 < 0)
+            playerAudio.setPosition(0);
+        else
+            playerAudio.getPosition() - 10;
+    }
+
+    if (button == &forwardButton)
+    {
+        if (playerAudio.getPosition + 10 > playerAudio.getLength)
+            playerAudio.setPosition(playerAudio.getLength());
+        else
+            playerAudio.getPosition() + 10;
     }
 }
 
