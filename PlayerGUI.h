@@ -20,10 +20,13 @@ private:
 	juce::TextButton loadButton{ "Load File" };
 	juce::TextButton restartButton{ "Restart" };
 	juce::TextButton stopButton{ "Stop" };
+	juce::TextButton backwardButton{ "-10" };
+	juce::TextButton forwardButton{ "+10" };
 	juce::Slider volumeSlider;
 	std::unique_ptr<juce::FileChooser> fileChooser;
 	// Event handlers
 	void buttonClicked(juce::Button* button) override;
 	void sliderValueChanged(juce::Slider* slider) override;
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlayerGUI)
+
 };
