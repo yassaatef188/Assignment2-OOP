@@ -20,10 +20,20 @@ private:
 	juce::TextButton loadButton{ "Load File" };
 	juce::TextButton restartButton{ "Restart" };
 	juce::TextButton stopButton{ "Stop" };
+	juce::TextButton muteButton{ "Mute" };
+	juce::TextButton loopButton{ "Loop" };
+	juce::TextButton pauseButton{ "Pause" };
+	juce::TextButton goStartButton{ "Go To Start" };
+	juce::TextButton goEndButton{ "Go To End" };
 	juce::Slider volumeSlider;
 	std::unique_ptr<juce::FileChooser> fileChooser;
+	bool isMuted = false;
+	bool isLooping = false;
+	bool isPlaying = true;
+	float oldVolume = 0.5f;
 	// Event handlers
 	void buttonClicked(juce::Button* button) override;
 	void sliderValueChanged(juce::Slider* slider) override;
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlayerGUI)
+
 };
