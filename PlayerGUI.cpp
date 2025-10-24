@@ -3,7 +3,7 @@
 PlayerGUI::PlayerGUI()
 {
     // Add buttons
-    for (auto* btn : { &loadButton, &restartButton , &stopButton})
+    for (auto* btn : { &loadButton, &restartButton , &stopButton, &backwardButton, &fowardButton, &muteButton, &loopButton, &pauseButton, &goStartButton, &goEndButton})
     {
         btn->addListener(this);
         addAndMakeVisible(btn);
@@ -22,14 +22,16 @@ void PlayerGUI::resized()
     loadButton.setBounds(20, y, 100, 40);
     restartButton.setBounds(130, y, 80, 40);
     stopButton.setBounds(220, y, 80, 40);
-    muteButton.setBounds(310, y, 80, 40);
-    loopButton.setBounds(400, y, 80, 40);
-    pauseButton.setBounds(490, y, 80, 40);
-    goStartButton.setBounds(580, y, 80, 40);
-    goEndButton.setBounds(670, y, 80, 40);
-    prevButton.setBounds(760, y, 80, 40);
-    nextButton.setBounds(850, y, 80, 40);
-
+    backwardButton.setBounds(310, y, 80, 40);
+    forwardButton.setBounds(400, y, 80, 40);
+    /*prevButton.setBounds(340, y, 80, 40);
+    nextButton.setBounds(440, y, 80, 40);*/
+    muteButton.setBounds(490, y, 80, 40);
+    loopButton.setBounds(580, y, 80, 40);
+    pauseButton.setBounds(670, y, 80, 40);
+    goStartButton.setBounds(760, y, 80, 40);
+    goEndButton.setBounds(850, y, 80, 40);
+  
     volumeSlider.setBounds(20, 100, getWidth() - 100, 40);
 }
 
@@ -95,6 +97,28 @@ void PlayerGUI::buttonClicked(juce::Button* button)
         pauseButton.setButtonText("Start");
         isPlaying = false;
     }
+
+        if (button == &backwardButton)
+    {
+        if (playerAudio.getPosition() - 10 < 0)
+        {
+            playerAudio.setPosition(0);
+        }
+        else
+            playerAudio.setPosition(playerAudio.getPosition() - 10);
+    }
+
+        if (button == &forwardButton)
+    {
+        if (playerAudio.getPosition() + 10 > playerAudio.getLength())
+        {
+            playerAudio.setPosition(playerAudio.getLength());
+        }
+        else
+        {
+            playerAudio.setPosition(playerAudio.getPosition() + 10);
+        }
+    }
     if (button == &muteButton)
     {
         isMuted = !isMuted;
@@ -153,4 +177,5 @@ void PlayerGUI::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &volumeSlider)
         playerAudio.setGain((float)slider->getValue());
+
 }
